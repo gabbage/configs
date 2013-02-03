@@ -1,0 +1,1 @@
+../../.config/awesome/theme.lua
