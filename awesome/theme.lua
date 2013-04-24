@@ -4,16 +4,16 @@
 
 theme = {}
 
-theme.font          = "fixed 10"
+theme.font          = "inconsolata 11"
 
-theme.bg_normal     = "#444444"
+theme.bg_normal     = "#666666"
 theme.bg_focus      = "#3465A4"
-theme.bg_urgent     = "#ff0000"
+theme.bg_urgent     = "#cc3333"
 theme.bg_minimize   = "#444444"
 
-theme.fg_normal     = "#bbbbbb"
+theme.fg_normal     = "#dddddd"
 theme.fg_focus      = "#000000"
-theme.fg_urgent     = "#ffffff"
+theme.fg_urgent     = "#cc0033"
 theme.fg_minimize   = "#ffffff"
 
 theme.border_width  = "1"
@@ -91,7 +91,12 @@ theme.layout_tiletop = "/usr/share/awesome/themes/default/layouts/tiletopw.png"
 theme.layout_spiral  = "/usr/share/awesome/themes/default/layouts/spiralw.png"
 theme.layout_dwindle = "/usr/share/awesome/themes/default/layouts/dwindlew.png"
 
-theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
+theme.keymap_icon = "/usr/share/awesome/themes/mydefault/layouts/batcht/code.png"
+theme.heart       = "/usr/share/awesome/themes/mydefault/layouts/batcht/heart-full.png"
+theme.nope        = "/usr/share/awesome/themes/mydefault/layouts/batcht/nope.png"
+theme.menu        = "/usr/share/awesome/themes/mydefault/layouts/batcht/menu.png"
+ 
 
+theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png" 
 return theme
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
