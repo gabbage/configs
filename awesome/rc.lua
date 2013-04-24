@@ -42,7 +42,7 @@ end
 beautiful.init("/usr/share/awesome/themes/mydefault/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "xterm -fa inconsolata-11"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -102,9 +102,12 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+mylauncher = awful.widget.launcher({ image = theme.menu,
                                      menu = mymainmenu })
 
+mykeymapmenu = awful.menu({ items = { { "de", "setxkbmap de", theme.nope},
+                                      { "neo" , "setxkbmap de neo -option", theme.heart}}})
+mykeymaplauncher = awful.widget.launcher( { image = theme.keymap_icon, menu = mykeymapmenu})
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
@@ -114,13 +117,15 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mytextclock = awful.widget.textclock()
 
 widgetseperator = wibox.widget.textbox()
-widgetseperator:set_text(" :: ")
+widgetseperator:set_text(" | ")
 
 -- Initialize widget
 cpuwidget = awful.widget.graph()
 -- Graph properties
 cpuwidget:set_width(50)
-cpuwidget:set_background_color("#494B4F")
+--cpuwidget:set_background_color("#494B4F")
+cpuwidget:set_background_color("#888888")
+
 cpuwidget:set_color("#FF5656")
 --cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
 cpuwidget:set_color("linear:0,0:8,14:0,#FF5656:0.5,#88A175:1,#AECF96")
@@ -129,6 +134,16 @@ vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
 
 netwidget = wibox.widget.textbox()
 vicious.register(netwidget, vicious.widgets.net, "<span color='#33EE33'>↓ ${eth0 down_kb}kb</span><span color='#FF1111'> ↑ ${eth0 up_kb}kb</span>")
+
+-- keymap text
+keymapwid = wibox.widget.textbox()
+keymapbool = os.execute("export KEYMAP=`setxkbmap -query | grep \'layout\' | awk \'{print $2}\'`")
+keymaptext = os.getenv("KEYMAP")
+if keymaptext then
+  keymapwid.text = "kmap: " .. keymaptext
+else
+  keymapwid.text = "kmap: error"
+end
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -207,6 +222,8 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(widgetseperator)
+    right_layout:add(mykeymaplauncher)
     right_layout:add(widgetseperator)
     right_layout:add(netwidget)
     right_layout:add(widgetseperator)
