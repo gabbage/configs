@@ -42,7 +42,8 @@ end
 beautiful.init("/usr/share/awesome/themes/mydefault/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm -fa inconsolata-11"
+--terminal = "xterm -fa inconsolata-11"
+terminal = "urxvt +sb" 
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 

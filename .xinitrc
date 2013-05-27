@@ -1,5 +1,6 @@
 
 xrdb -merge /etc/X11/Xresources
+xrdb -merge ~/.Xresources
 xset -b 
 xcompmgr &
 #exec ck-launch-session gnome-session
