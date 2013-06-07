@@ -12,6 +12,8 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 vicious = require("vicious")
 
+-- This awesome cofig is to be used with the neo2 keyboard layout
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -258,12 +260,12 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
-    awful.key({ modkey,           }, "j",
+    awful.key({ modkey,           }, "n",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "k",
+    awful.key({ modkey,           }, "r",
         function ()
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
@@ -271,11 +273,11 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
+    awful.key({ modkey, "Shift"   }, "n", function () awful.client.swap.byidx(  1)    end),
+    awful.key({ modkey, "Shift"   }, "r", function () awful.client.swap.byidx( -1)    end),
+    awful.key({ modkey, "Control" }, "n", function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey, "Control" }, "r", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey,           }, "h", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
@@ -286,22 +288,22 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey, "Control" }, "r", awesome.restart),
+    awful.key({ modkey, "Control" }, "c", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
+    awful.key({ modkey,           }, "t",     function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ modkey,           }, "s",     function () awful.tag.incmwfact(-0.05)    end),
+    awful.key({ modkey, "Shift"   }, "s",     function () awful.tag.incnmaster( 1)      end),
+    awful.key({ modkey, "Shift"   }, "t",     function () awful.tag.incnmaster(-1)      end),
+    awful.key({ modkey, "Control" }, "s",     function () awful.tag.incncol( 1)         end),
+    awful.key({ modkey, "Control" }, "t",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
-    awful.key({ modkey, "Control" }, "n", awful.client.restore),
+    awful.key({ modkey, "Control" }, "m", awful.client.restore),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey },            "c",     function () mypromptbox[mouse.screen]:run() end),
 
     awful.key({ modkey }, "x",
               function ()
@@ -323,7 +325,7 @@ globalkeys = awful.util.table.join(
     awful.key({modkey }, "p", function() awful.util.spawn( "dmenu_run -b -l 13 -i -nb '#444444' -sb '#3465A4'" ) end),
        --
     -- call slock to lock screen
-    awful.key({modkey} , "s", function() awful.util.spawn("slock") end)
+    awful.key({modkey} , "i", function() awful.util.spawn("slock") end)
 )
 
 clientkeys = awful.util.table.join(
@@ -414,6 +416,8 @@ awful.rules.rules = {
     { rule = { class = "Pidgin" }, 
       properties = { tag = tags[screen.count()][3] } },
     { rule = { class = "Mail" }, 
+      properties = { tag = tags[screen.count()][3] } },
+    { rule = { class = "thunderbird" }, 
       properties = { tag = tags[screen.count()][3] } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
